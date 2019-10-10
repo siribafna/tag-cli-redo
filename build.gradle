@@ -11,6 +11,9 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
+bootRun {
+	standardInput = System.in;
+}
 
 dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.1.9.RELEASE'

@@ -1,6 +1,7 @@
 package com.improving.tagcliredo.database;
 
 
+import com.improving.tagcliredo.models.Emote;
 import com.improving.tagcliredo.models.Weapon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class DatabaseClient {
@@ -29,7 +31,7 @@ public class DatabaseClient {
             logger.error("Error: ", e);
         }
     }
-    public void insertIntoTable() {
+    public void insertIntoTableWeapon() {
         try {
             logger.info("GOT IT!");
             int rowsAffected = jdbcTemplate.update("INSERT INTO weapon (Name, Area, ItemType) VALUES ('SMALLISH DAGGER', 'Dagger shop', 'Weapon')");
@@ -48,5 +50,15 @@ public class DatabaseClient {
             logger.error("Error: ", e);
         }
         return Collections.EMPTY_LIST;
+    }
+
+    public void insertIntoTableEmote(Emote emote) {
+        try {
+            logger.info("GOT Emote!");
+            int rowsAffected = jdbcTemplate.update("INSERT INTO emote (Prompt, Text) VALUES ('" + emote.getPrompt() + "', '" + emote.getText() + "')");
+            logger.info("Rows Affected: {}", rowsAffected);
+        } catch (DataAccessException e) {
+            logger.error("Exception throw in JDBC: ", e);
+        }
     }
 }
